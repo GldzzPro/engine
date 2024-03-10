@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Data } from "./types";
 import { EngineRecap } from "./components/EngineRecap/EngineRecap";
 import { GeneralStatusItem } from "./components/GeneralStatusItem/GeneralStatusItem";
@@ -21,12 +21,14 @@ function App() {
     fetchData();
   }, []);
 
+  const isDataReady = useMemo(() => data.engines.length > 1, [data]);
+
   return (
-    <div style={{ display: "flex", flexDirection: "row", width: "100vw" }}>
-      {data.engines.length > 1 && (
+    <div className="appLayout">
+      {isDataReady && (
         <>
           <EngineRecap data={data.engines[0]} />
-          <div style={{ display: "flex", flexDirection: "column" , justifyContent : "space-between"  , flex : 1 ,  padding : "5px" , border : "1px solid black"}}>
+          <div className="generalLayout">
             <Title title={GENERAL_STATUS_TITLE} />
             <DateInfo date={new Date()} />
             <GeneralStatusItem name={data.engines[0]?.name} status="normal" />
