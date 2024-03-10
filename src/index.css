@@ -12,6 +12,7 @@
   padding: 5px;
   border-radius: 3px;
   gap: 3px;
+  min-height: 100vh;
 }
 
 .generalLayout {
